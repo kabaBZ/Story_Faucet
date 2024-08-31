@@ -37,3 +37,8 @@ https://faucet-app-pi.vercel.app/
 - 所有基于本项目源代码，进行的任何修改，为其他个人或组织的自发行为，与本项目没有任何直接或间接的关系，所造成的一切后果亦与本项目无关。
 - 所有直接或间接使用本项目的个人和组织，应24小时内完成学习和研究，并及时删除本项目中的所有内容。如对本项目的功能有需求，应自行开发相关功能。
 - 本项目保留随时对免责声明进行补充或更改的权利，直接或间接使用本项目内容的个人或组织，视为接受本项目的特别声明。
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kabaBZ/Story_Faucet&type=Date)](https://star-history.com/#kabaBZ/Story_Faucet/&Date)
+
