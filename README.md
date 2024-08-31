@@ -2,9 +2,29 @@
 网址：
 https://faucet-app-pi.vercel.app/
 
+使用本地redis存储领水的账号，端口6379
+
+## 使用方法
+本地安装redis
+
+本地安装python
+
+安装python依赖
+
+``pip install -r requirements.txt``
+
+去网站获取cookie，替换文件中的cookie字符串
+
+领水运行``python faucet.py``
+
+归集前先修改env文件中的to_address
+
+归集运行``python transfer_ip.py``
+
 ## 存在问题
-- 领水接口要经过fiddler代理才能返回200，否则会403，暂时不知道为什么。。。
+- 领水接口要经过fiddler代理(本地端口8888)才能返回200，否则会403，暂时不知道为什么。。。
 - cookie暂不支持自动生成，如果失效了需要手动更新
+- 领水现在页面显示成功但是并不会到账，等待官方修复
 
 
 ## 特别声明
