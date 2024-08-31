@@ -8,8 +8,8 @@ import redis
 from curl_cffi import requests
 from eth_account import Account
 
-from config import cookies
-from headers import act1_headers
+from utils.config import cookies
+from utils.headers import act1_headers
 
 from loguru import logger
 
@@ -17,7 +17,7 @@ logger.add("faucet.log")
 
 data = [
     {
-        "address": "0xcd1bd723bb7c1da46e12400c492ab34072838bd4",
+        "address": "",
         "token": "0.z-SRmsgEpOgx1eufh36MOyCGvBklzTdDnQrFxnB8r5CDZiZa5CbKX0sCdovHLa2ry1p2mhM5BfdoMolvD9HX2kIfyw5LOMPvvuhps0-2WXEysKhMY6eT8x3NKrwU00yEQH9q4HBB2j4BU6t3xVhafoJbkH0UCerqQJLJrZOk4owVmkeyJO6URwxWhSdTre9pI-S7ib4Wb6VvWYTPIyX2mXmH7MBNPu9JJMHzqxtCFWCNmlVKUhNhN8lHXUmquJn6ndCA8D0nHTK1QxMeqZEZJs9oixriQtJK28fHSfS7LIeFYYroeEKWPCGNtVSlnUHvT0HJ5baqZJ9b8d-2mIUTx6wk_qEMu4-KhxRfBbWQJsMz3xTQfQlFamEye4H3nx4vkj9lLjxSGH-Ko2cxBetuRBQqQErcsDAjTolXESfiOicG3BLCeBD3qRpHB4ePI_sMRxprYqWQBsKZjR7aQtGme3lGIxt4Z-2W2gAfBT-Hmwo.8ogcu54XeUD6dBNoeiG6zw.72e516eea67040fc302ef6255ff3e3502db33a3a7b74da6291df283ad1982bf5",
         "id": "bd39ebcc-b7bb-4cae-be59-113587dbb8f3",
         "provider": "X",

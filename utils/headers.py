@@ -2,7 +2,7 @@
 
 # requests = cloudscraper.create_scraper()
 
-from config import action1, baggage, sentrytrace, action2
+from utils.config import action1, baggage, sentrytrace, action2
 
 
 act1_headers = {
