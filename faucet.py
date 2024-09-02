@@ -69,8 +69,13 @@ def set_address(addr):
 
 def send_request(headers, wallet, redis_client):
     proxies = {"http": "127.0.0.1:8888", "https": "127.0.0.1:8888"}
-    load_dotenv()
+    load_dotenv(override=True)
     vcrcs_cookie = os.getenv("vcrcs")
+    #     logger.debug(
+    #         f"""
+    # cookie:{vcrcs_cookie}
+    # """
+    #     )
     response = requests.post(
         "https://faucet-app-pi.vercel.app/",
         headers=headers,
