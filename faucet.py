@@ -6,14 +6,33 @@ import time
 
 import redis
 from curl_cffi import requests
+from dotenv import load_dotenv
 from eth_account import Account
-
-from utils.config import cookies
-from utils.headers import act1_headers
-
 from loguru import logger
 
 logger.add("faucet.log")
+
+act1_headers = {
+    "Host": "faucet-app-pi.vercel.app",
+    "Connection": "keep-alive",
+    "sec-ch-ua": '"Chromium";v="128", "Not;A=Brand";v="24", "Microsoft Edge";v="128"',
+    "Next-Router-State-Tree": "%5B%22%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2C%22%2F%22%2C%22refresh%22%5D%7D%2Cnull%2Cnull%2Ctrue%5D",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0",
+    "Content-Type": "text/plain;charset=UTF-8",
+    "Accept": "text/x-component",
+    "Next-Action": "4bb3c690c4758b1deb49ab27129bac517ea77d04",
+    # "baggage": baggage,
+    # "sentry-trace": sentrytrace,
+    "sec-ch-ua-platform": '"Windows"',
+    "Origin": "https://faucet-app-pi.vercel.app",
+    "Sec-Fetch-Site": "same-origin",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Dest": "empty",
+    "Referer": "https://faucet-app-pi.vercel.app/",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+}
 
 data = [
     {
@@ -50,13 +69,18 @@ def set_address(addr):
 
 def send_request(headers, wallet, redis_client):
     proxies = {"http": "127.0.0.1:8888", "https": "127.0.0.1:8888"}
+    load_dotenv()
+    vcrcs_cookie = os.getenv("vcrcs")
     response = requests.post(
         "https://faucet-app-pi.vercel.app/",
         headers=headers,
-        cookies=cookies,
+        cookies={
+            "_vcrcs": vcrcs_cookie,
+        },
         verify=False,
         proxies=proxies,
         data=json.dumps(data, separators=(",", ":")),
+        # impersonate="chrome124",
     )
 
     parsed_response = json.loads(re.findall("1:(.*?)\n", response.text)[0])
@@ -77,18 +101,6 @@ def send_request(headers, wallet, redis_client):
         "success_wallet_list",
         json.dumps({"address": wallet.address, "pri_key": wallet.pri_key}),
     )
-
-    #  # 写入本地文件
-    # if not os.path.exists("success.json"):
-    #     with open("success.json", "w") as f:
-    #         json.dump([{"address": wallet.address, "pri_key": wallet.pri_key}], f)
-    # else:
-    #     # 增量写入
-    #     with open("success.json", "r") as f:
-    #         l = json.load(f)
-    #         l.append({"address": wallet.address, "pri_key": wallet.pri_key})
-    #     with open("success.json", "w") as f:
-    #         json.dump(l, f)
 
 
 def create_wallet():
